@@ -1,0 +1,616 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>DotNet Studia Podyplomowe WSZiB</title>
+
+	<meta name="description" content="DotNet Core - Studia Podyplomowe WSZiB">
+	<meta name="author" content="Daniel Krasnokucki">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<link rel="stylesheet" href="pliki/css/reveal.css">
+	<link rel="stylesheet" href="pliki/css/theme/white.css">
+	<link rel="stylesheet" href="pliki/css/daniel.css">
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="pliki/lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'pliki/css/print/pdf.css' : 'pliki/css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+</head>
+
+<body>
+	<div class="reveal">
+		<div id="header">Daniel Krasnokucki - Platforma .NET</div>
+		<img src="pliki/img/logonet.jpg" id="logo" />
+		<div class="slides">
+			<section>
+				<section>
+					<h1>DZIEŃ DOBRY!</h1>
+				</section>
+				<section>
+					<h2>AGENDA ogólna - część 2</h2>
+					<ol>
+						<li class="fragment highlight-blue">ANKIETA</li>
+						<li>GIT</li>
+						<li>HTML, CSS, JS</li>
+						<li>SQL</li>
+						<li>Wzorce architektoniczne</li>
+						<li>.Net Core MVC</li>
+						<li>Entity Framework</li>
+					</ol>
+				</section>
+				<section>
+					<h3>Technologie w programowaniu</h3>
+					<img src="pliki/img/tech_network-1.svg" id="jezyki" />
+					<br>
+					<small>Źródło:
+						<a href="https://insights.stackoverflow.com/survey/2018#technology-how-technologies-are-connected">Stack Overflow</a>
+					</small>
+				</section>
+			</section>
+			<section>
+				<section data-background="pliki/img/particles.png">
+					<h3>GIT</h3>
+				</section>
+				<section>
+					<h3>GIT - dlaczego...</h3>
+					<img src="pliki/img/wersje.png" id="gitVersions" />
+				</section>
+				<section>
+					<h2>Słownik</h2>
+					<p><b>branch</b> - odgałęzienie. </p>
+					<p><b>commit</b> - stan projektu (migawka) w danej chwili.</p>
+					<p><b>indeks</b> (staging area) - poczekalnia. Trzyma zmiany, które zostaną zacommitowane do nowej wersji</p>
+					<p><b>HEAD</b> - wskaźnik do gałęzi, w której się obecnie znajdujesz</p>
+				</section>
+				<section>
+					<h2>Słownik</h2>
+					<p><b>katalog</b> roboczy (working directory) - katalog, w którym dokonujemy zmian</p>
+					<p><b>master</b> - zwyczajowa nazwa głównego odgałęzienia</p>
+					<p><b>merge</b> - scalanie/łączenie plików lub gałęzi w jedną</p>
+					<p><b>obiekt</b> - coś, co jest w repozytorium (obiektami są: blob, drzewo, commit, tag)</p>
+				</section>
+				<section>
+					<h2>Słownik</h2>
+					<p><b>origin</b> - zwyczajowa nazwa głównego repozytorium</p>
+					<p><b>nazwa</b> - nazwa obiektu, dwudziestocyfrowy skrót SHA-1 dla danego obiektu</p>
+					<p><b>ORIG_HEAD</b> - wskaźnik do obecnej gałęzi repozytorium zdalnego</p>
+					<p><b>ref</b> - referencja, wskaźnik na commit (może to być gałąź, tag, etc.)</p>
+				</section>
+				<section>
+					<h2>Słownik</h2>
+					<p><b>repozytorium</b> - struktura danych, zawierająca historię projektu</p>
+					<p><b>repozytorium lokalne</b> - miejsce przechowywania zacommitowanych plików </p>
+					<p><b>repozytorium zdalne</b> - wersja projektu utrzymywana na serwerze</p>
+					<p><b>revision</b> - rewizja, kolejna wersja plików w repozytorium.</p>
+					<p><b>tag</b> - zrozumiała dla człowieka nazwa obiektu wraz z informacją o osobie tagującej.</p>
+				</section>
+				<section>
+					<h3>GIT -zasada działania</h3>
+					<img src="pliki/img/GitFlow.png" id="gitFlow" />
+					<br>
+					<small>Źródło:
+						<a href="https://helion.pl/ksiazki/tablice-informatyczne-git-daniel-krasnokucki,tingit.htm">Tablice GIT - Helion</a>
+					</small>
+				</section>
+				<section>
+					<h3>GIT - rozszerzenie</h3>
+					<img src="pliki/img/komendyRozszerzone.PNG" id="gitFlow" />
+				</section>
+				<section>
+					<h2>Podstawowy sposób pracy z Git wygląda mniej więcej tak:</h2>
+					<ol>
+						<li>Dokonujesz modyfikacji plików w katalogu roboczym.</li>
+						<li>Oznaczasz zmodyfikowane pliki jako śledzone, dodając ich bieżący stan (migawkę) do przechowalni.</li>
+						<li>Dokonujesz zatwierdzenia (commit), podczas którego zawartość plików z przechowalni zapisywana jest jako
+							migawka projektu w katalogu Git.</li>
+					</ol>
+				</section>
+				<section>
+					<h2>Najważniejsze polecenia</h2>
+					<i color="red">--help</i> - wyświetlenie pomocy dla dowolnego polecenia
+					<pre><code class="C#" data-trim contenteditable>						
+							git config --help						
+						</code></pre>
+				</section>
+				<section>
+					<h2>Najważniejsze polecenia</h2>
+					<i color="red">git status</i> - wyświetla informację o tym, które zmiany w katalogu roboczym zostały zapisane w
+					indeksie, a które nie
+					<img src="pliki/img/git_statusy.JPG" id="gitStatusy" />
+				</section>
+				<section>
+					<h2>Zmiana statusów pliku</h2>
+					<img src="pliki/img/fileLifecycle.png" id="gitPlik" />
+				</section>
+				<section>
+					<h2>.gitignore</h2>
+					<p>W pliku .gitignore podajemy pliki lub wzorzec dla plików, które chcemy pomijać przy dodawaniu do repozytorium.
+						Można go utworzyć w dowolnym katalogu i będzie miał on zastosowanie do katalogu, w którym jest umieszczony oraz
+						wszystkich jego podkatalogów.</p>
+				</section>
+				<section>
+					<h2>Inicjowanie repozytorium</h2>
+					<i color="red">git status</i> - wyświetla informację o tym, które zmiany w katalogu roboczym zostały zapisane w
+					indeksie, a które nie
+					<img src="pliki/img/GitConsole.JPG" id="gitConsole" />
+				</section>
+				<section>
+					<h2>Prosta strona HTML</h2>
+					<pre><code class="HTML" data-trim contenteditable>
+						ZADANIE
+						</code></pre>
+				</section>
+				<section>
+					<pre><code class="html" data-trim contenteditable>
+							<!doctype html>
+							<html>
+								<head>
+									<meta charset="UTF-8" />
+									<title>Tytuł strony!</title>
+								</head>
+								<body>
+									<header>
+										Nagłówek
+									</header>
+									<nav>
+										Menu
+									</nav>
+									<main>
+										<article>
+												Jakieś wiadomości
+										</article>
+									</main>
+									<aside>
+										Kolumna boczna
+									</aside>
+									<footer>
+										Stopka
+									</footer>
+								</body>
+							</html>
+						</code></pre>
+				</section>
+				<section>
+					<h2>Dodawanie odwołań do plików</h2>
+					<pre><code class="HTML" data-trim contenteditable>
+						<head>
+							<title>Tytuł strony</title>
+							<link rel="stylesheet" href="style.css" type="text/css" />
+						</head>
+					</code></pre>
+				</section>
+				<section>
+					<h2>MENU</h2>
+					<pre><code class="HTML" data-trim contenteditable>
+						<nav>
+							<ul>
+									<li><a href="/">Strona główna</a></li>
+									<li><a href="/O mnie">O mnie</a></li>
+									<li><a href="/artykuly">Artykuły</a>
+										<ul>
+											<li><a href="#">Prawo</a></li>
+											<li><a href="#">Polityka</a></li>
+											<li><a href="#">Programowanie</a></li>
+										</ul>
+									</li>
+									<li><a href="/opinie">Opinie</a></li>
+									<li><a href="/kontakt">Kontakt</a></li>
+							</ul>
+						</nav>
+					</code></pre>
+				</section>
+				<section>
+					<h2>CSS</h2>
+					<pre><code class="CSS" data-trim contenteditable>
+								ul {
+									list-style: none;
+									float: left;
+							   }
+								
+							   ul > li {
+									margin: 0;
+									padding: 0;
+									float: left; 
+									position: relative;
+									height: 30px;
+							   }
+								
+							   ul > li > a {
+									padding: 10px; 
+									color: grey;
+									text-decoration: none;
+							   }
+								
+							   ul > li > a:hover, 
+							   ul > li:hover > a {
+									color: #de5f44;
+									text-decoration: underline;
+							   }
+								
+							   ul > li ul {
+									padding: 0;
+									position: absolute; 
+									display: none; 
+									left: 0px; 
+									top: 30px; 
+									width: 200px; 
+									text-align: left;
+									background-color: #fcfcfc;
+									border: 1px solid #ccc;
+							   }
+								
+							   ul li:hover > ul {
+									display: block;
+							   }
+								
+							   ul > li ul ul {
+									left: 200px; 
+									top: -1px;
+							   }
+								
+							   ul > li ul li {
+									margin: 0; 
+									padding: 0;
+									position: relative; 
+									float: none; 
+									height: auto;
+							   }
+								
+							   ul > li ul li a {
+									padding: 10px 20px; 
+									color: #202020; 
+									text-decoration: none;
+									display: block;
+							   }
+								
+							   ul > li ul li a:hover,
+							   ul > li ul li:hover > a {
+									text-decoration: none;
+									color: #fff;
+									background-color: #f26c4f;
+							   }
+						</code></pre>
+				</section>
+			</section>
+			<section>
+				<section data-background="pliki/img/particles.png">
+					<h3>SQL</h3>
+				</section>
+				<section>
+					<h2>Relacyjne Bazy danych</h2>
+					<q class="fragment" cite="https://excelbi.pl/czym-jest-relacyjna-baza-danych-jak-tworzyc-relacje-w-powerpivot/">
+						Relacyjna baza danych to opisany i zorganizowany zbiór tabel połączonych relacjami – związkami między sobą.
+						<br />Ten sposób przechowywania informacji pozwala na uniknięcie redundancji (powtarzania się danych) oraz
+						przeprowadzanie analiz na podstawie wielu tabel.
+						<br />Każda tabela składa się z rekordów (tak nazywamy pojedyncze wiersze).
+						<br />Poszczególne rekordy składają się z pól (komórek), przechowujących jedną daną.</q>
+					<br>
+				</section>
+				<section>
+					<h3>Relacja 1 do 1</h3>
+					<img src="pliki/img/Relacja_1_to_1.png" id="relacjeSQL" />
+				</section>
+				<section>
+					<h3>Podstawowe operacje</h3>
+					<img src="pliki/img/CRUD.PNG" id="crud" />
+				</section>
+				<section>
+					<h2>Nasza baza</h2>
+					morfeusz.wszib.edu.pl
+				</section>
+				<section>
+					<h2>SQL</h2>
+					<pre><code class="HTML" data-trim contenteditable>
+						ZADANIA
+						</code></pre>
+				</section>
+				<section>
+					<h2>SQL - zadania - NORTHWIND</h2>
+					<ol>
+						<li>Wyświetl wszystkich pracowników w formacie: Nazwisko, Imię, Stanowisko.</li>
+						<li>Znajdź dane firmy o nazwie „Alfreds Futterkiste”</li>
+						<li>Znajdź dostawców czekolady. </li>
+						<li>Zrób raport sprzedaży za 1996 rok.</li>
+						<li>Wyświetl liczbę pracowników.</li>
+						<li>Wyświetl aktualną listę produktów.</li>
+						<li>Pokaż wszystkich pracowników których nazwiska zaczynają się na literę D.</li>
+					</ol>
+				</section>
+			</section>
+			<section>
+				<section data-background-image="pliki/img/particles.png">
+					<h3>ASP .NET Core MVC</h3>
+				</section>
+				<section>
+					<h3>.NET</h3>
+					<img src="pliki/img/image_thumb757.png" />
+					<br>
+					<small>Źródło:
+						<a href="https://blogs.msdn.microsoft.com/cesardelatorre/2016/06/27/net-core-1-0-net-framework-xamarin-the-whatand-when-to-use-it/">MSDN</a>
+					</small>
+				</section>
+				<section>
+					<h3>Architektura trójwarstwowa</h3>
+					<img src="pliki/img/TrojwarstwowaArchitektura.png" />
+				</section>
+				<section>
+					<h3>Wzorce architektoniczne - MVC, MVP, MVVM</h3>
+					<ul>
+						<li>Model</li>
+						<li>Widok</li>
+						<li>Model widoku</li>
+						<li>Prezenter</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Wzorce architektoniczne - MVP</h3>
+					<img src="pliki/img/MVP.png" />
+				</section>
+				<section>
+					<h3>Wzorce architektoniczne - MVP</h3>
+					<ol>
+						<li>Widok obsługuje interakcję użytkownika …</li>
+						<li>… po czym wywołuje odpowiednią funkcję na interfejsie prezentera</li>
+						<li>Prezenter aktualizuje model</li>
+						<li>Prezenter wywołuje funkcję na interfejsie widoku, przekazując potrzebne informacje lub dane</li>
+					</ol>
+				</section>
+				<section>
+					<h3>Wzorce architektoniczne - MVVM</h3>
+					<img src="pliki/img/MVVM2.jpg" />
+				</section>
+				<section>
+					<h3>MVVM - Model</h3>
+					Tutaj przechowywany jest kod z logiką biznesową. Tutaj dane są pobierane i przetwarzane.
+				</section>
+				<section>
+					<h3>MVVM - Widok</h3>
+					To, co będzie wyświetlane - widok. W przypadku np. WPF to po prostu kod *.xaml. Nie powinna znajdować się tutaj
+					żadna logika aplikacji.
+				</section>
+				<section>
+					<h3>MVVM - Model widoku (View Model)</h3>
+					Tutaj umieszczamy wszystko co znajdowało się do tej pory w code-behind. Jest to pośrednik pomiędzy Modelem, a
+					View. W istocie ViewModel jest czymś, co wystawia dane dla naszego View, poprzez właściwości.
+				</section>
+				<section>
+					<h3>Wzorce architektoniczne - MVC</h3>
+					<img src="pliki/img/Model-View-Controller-High-Level-Diagram.png" />
+				</section>
+				<section>
+					<h3>Wzorce architektoniczne - MVC</h3>
+					<ol>
+						<li>Użytkownik wchodzi w interakcję z aplikacją, co zostaje wychwycone przez kontroler.</li>
+						<li>Kontroler zleca modelowi zaktualizowanie danych (na przykład zapis do lokalnej bazy, lub pobranie informacji
+							z sieci).</li>
+						<li>Kontroler zleca aktualizację widoku.</li>
+						<li>Widok pobiera z modelu najświeższe dane.</li>
+					</ol>
+				</section>
+				<section>
+					<h3>Wzorce architektoniczne - podsumowanie</h3>
+					<img src="pliki/img/wzorce_podsumowanie.png" />
+				</section>
+				<section>
+					<h3>Przykłady - MVC, MVP, MVVM</h3>
+					<ul>
+						<li>MVP - Windows Forms</li>
+						<li>MVVM - WPF</li>
+						<li>MVC - ASP .NET</li>
+					</ul>
+				</section>
+				<section>
+					<h2>ASP .NET Core MVC</h2>
+					<small>ASP .NET (Active Server Pages.NET)</small>
+					<pre><code class="C#" data-trim contenteditable>
+						PRZYKŁAD
+					</code></pre>
+				</section>
+				<section>
+					<h2>ORM</h2>
+					<small>Object-Relational Mapping</small>
+					<small>Mapowanie (odwzorowanie) obiektowo relacyjne </small>
+					<p>Sposób odwzorowania obiektowej architektury systemu informatycznego na bazę danych (lub inny element systemu) o
+						relacyjnym charakterze.
+					</p>
+					<p>Implementacja takiego odwzorowania stosowana jest m.in. w przypadku, gdy tworzony system oparty jest na
+						podejściu obiektowym, a system bazy danych operuje na relacjach.</p>
+				</section>
+				<section>
+					<h2>Entity Framework</h2>
+					<p>EF pozwala nam na pisanie obiektów POCO (Plain Old CLR Object) dla naszych modeli a następnie na przechowywanie
+						ich w bazie danych za pomocą definicji klasy DbContext. Po co?</p>
+					<ul>
+						<li>możliwość wsparcia projektowego Domain Driven Design;</li>
+						<li>możliwość szybszego rozpoczęcia procesu tworzenia kodu (bez konieczności czekania na gotową bazę danych);</li>
+						<li>klasy modeli są dużo czytelniejsze ponieważ nie zawierają logiki związanej z przechowywaniem modeli w bazie
+							danych;</li>
+						<li>warstwa przechowywania danych może być zmieniona bez żadnego wpływu na istniejące modele.</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Plain Old CLR Object (POCO)</h2>
+					<p>odpowiednik występującego na platformie Java EE terminu POJO używany przez programistów tworzących kod w
+						środowisku Common Language Runtime platformy .NET.</p>
+					<p>Podobnie jak w Javie, termin ten oznacza prosty obiekt nieobciążony dziedziczeniem, praktycznie niezawierający
+						logiki biznesowej</p>
+					<p>POCO odseparowuje nas od konieczności używania jednego narzędzia ORM. Dzięki temu mamy możliwość użycia innych maperów  do tworzenia naszych klas. Przekłada się to również na większą re-używalność stworzonego kodu. Innym aspektem jest testowanie. Testowanie POCO jest łatwiejsze, gdyż nie ma zbędnych powiązań pomiędzy klasami.</p>
+				</section>
+				<section>
+					<h3>Entity Framework - zastosowania</h3>
+					<img src="pliki/img/Entity_Nuget.jpg" />
+				</section>
+				<section>
+					<h2>Entity Framework</h2>
+					<p>dostarcza trzy różne podejścia do odwzorowywania encji modelu domeny na relacyjne obiekty bazy danych:</p>
+					<ul>
+						<li><b>database-first</b>: zaczynamy od utworzenia bazy danych, a EF automatycznie generuje klasy modelu na
+							podstawie struktury bazy danych</li>
+						<li><b>model-first</b>: zaczynamy od utworzenia klas modelu w dedykowanym designerze i mapujemy je na istniejącą
+							bazę danych lub EF generuje bazę na podstawie stworzonego modelu</li>
+						<li><b>code-first</b>: zaczynamy od utworzenia klas modelu wprost w kodzie i mapujemy na obiekty bazy danych.</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Entity Framework Core - 2 podejścia</h3>
+					<img src="pliki/img/ef-core-dev-approaches.png" />
+				</section>
+			</section>
+			<section>
+				<section data-background-image="pliki/img/particles.png">
+					<h3>Powtórka ASP .NET Core MVC</h3>
+				</section>
+				<section>
+					<h3>Podłączenie Entity Framework</h3>
+					<img src="pliki/img/Projekt/install-efcore-2.png" />
+				</section>
+				<section>
+					<h2>Kontekst </h2>
+					<pre><code class="C#" data-trim contenteditable>
+						public class FilmContext : DbContext
+						{
+							public FilmContext(DbContextOptions<Context> options) : base(options)
+							{
+							}
+
+							public DbSet<Film> Filmy { get; set; }
+						}
+					</code></pre>
+				</section>
+				<section>
+					<h2>Rejestracja Kontekstu --> Startup.cs</h2>
+					<pre><code class="C#" data-trim contenteditable>
+						services.AddDbContext<Context>(options =>
+							options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+					</code></pre>
+				</section>
+				<section>
+					<h2>Connection String --> appsettings.json</h2>
+					<pre><code class="C#" data-trim contenteditable>
+						"ConnectionString": {
+							"DefaultConnection": "server=MY_SERVER;database=MovieDB;User ID=MY_USER;password=MY_PASSWORD;"
+						  }
+					</code></pre>
+				</section>
+				<section>
+					<h2>Package Manager console</h2>
+					<pre><code class="C#" data-trim contenteditable>
+						
+						Add-Migration EFCoreCodeFirstSample.Models.EmployeeContext
+						------
+						update-database
+						------
+					</code></pre>
+				</section>
+				<section>
+					<h3>Architektura trójwarstwowa</h3>
+					<img src="pliki/img/TrojwarstwowaArchitektura.png" />
+				</section>
+				<section>
+					<h3>Wzorce architektoniczne - MVC, MVP, MVVM</h3>
+					<ul>
+						<li>Model</li>
+						<li>Widok</li>
+						<li>Model widoku</li>
+						<li>Prezenter</li>
+						<li>Controller</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Wzorce architektoniczne - MVC</h3>
+					<ol>
+						<li>Użytkownik wchodzi w interakcję z aplikacją, co zostaje wychwycone przez kontroler.</li>
+						<li>Kontroler zleca modelowi zaktualizowanie danych (na przykład zapis do lokalnej bazy, lub pobranie informacji
+							z sieci).</li>
+						<li>Kontroler zleca aktualizację widoku.</li>
+						<li>Widok pobiera z modelu najświeższe dane.</li>
+					</ol>
+				</section>
+				<section>
+					<h3>Wzorce architektoniczne - MVC</h3>
+					<img src="pliki/img/Model-View-Controller-High-Level-Diagram.png" />
+				</section>
+				<section>
+					<h3>Nowy projekt</h3>
+					<img src="pliki/img/Projekt/1.jpg" />
+				</section>
+				<section>
+					<h3>Nowy projekt</h3>
+					<img src="pliki/img/Projekt/2.jpg" />
+				</section>
+				<section>
+					<h3>Tworzenie Modelu</h3>
+					<img src="pliki/img/Projekt/Model.jpg" />
+				</section>
+				<section>
+					<h3>Scaffolding</h3>
+					<p>"Rusztowanie / szkielt"</p>
+					<p>Szybkie i proste generowanie obiektów/kodu na pdostawie dostępnych danych w celu późniejszej modyfikacji</p>
+				</section>
+				<section>
+					<h3>Tworzenie Kontrolera</h3>
+					<small>Controllers -> Add -> New Scaffolded Item</small>
+					<img src="pliki/img/Projekt/Controller.jpg" />
+				</section>
+				<section>
+					<h3>Łączenie Modelu i Kontrollera</h3>
+					<img src="pliki/img/Projekt/Model_Controller.jpg" />
+				</section>
+				<section>
+					<h3>Widoki</h3>
+					<img src="pliki/img/Projekt/Widoki.jpg" />
+				</section>
+			</section>
+		</div>
+	</div>
+
+	<script src="pliki/lib/js/head.min.js"></script>
+	<script src="pliki/js/reveal.js"></script>
+
+	<script>
+		// More info about config & dependencies:
+		// - https://github.com/hakimel/reveal.js#configuration
+		// - https://github.com/hakimel/reveal.js#dependencies
+		Reveal.initialize({
+			dependencies: [{
+					src: 'pliki/plugin/markdown/marked.js'
+				},
+				{
+					src: 'pliki/plugin/markdown/markdown.js'
+				},
+				{
+					src: 'pliki/plugin/notes/notes.js',
+					async: true
+				},
+				{
+					src: 'pliki/plugin/highlight/highlight.js',
+					async: true,
+					callback: function () {
+						hljs.initHighlightingOnLoad();
+					}
+				},
+				{
+					src: 'pliki/plugin/search/search.js',
+					async: true
+				},
+				{
+					src: 'pliki/plugin/zoom-js/zoom.js',
+					async: true
+				},
+			]
+		});
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+Stwórz program dla wypożyczalni filmów, który zawiera
+1. Bazę filmów dostępną dla każdego wraz  krótkim opisem każdego filmu oraz ceną
+2. Możliwość wyszukiwania po tytule
+3. Możliwość wyszukiwania po gatunku
+4. Możliwość wyszukiwania i sortowania po dacie produkcji
+5. Możliwość wyszukiwania po reżyserze
+6. Konto użytkownika
+- użytkownik, po zalogowaniu,  może wypożyczyć dany film lub zarezerwować go
+- po zalogowaniu powinno się wyświetlić, jakie filmy ma wypożyczone, ile jest winien i do kiedy powinien oddać dany film
+- jeśli użytkownik przekroczył czas wynajmu, powinno mu się pokazać przypomnienie o zwrot wraz z przewidywaną karą
+7. Ranking filmów na podstawie ocen użytkowników
+8. Konto administratora
+- możliwość dodania, usunięcia, zmiany danych filmu i ceny
+- możliwość ustawienia zniżki dla użytkowników
+- możliwość przedłużenia wynajmu dla poszczególnych użytkowników
