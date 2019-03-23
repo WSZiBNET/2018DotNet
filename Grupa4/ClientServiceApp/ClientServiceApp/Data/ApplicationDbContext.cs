@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ClientServiceApp.Models;
+using Microsoft.EntityFrameworkCore.Design;
 
 namespace ClientServiceApp.Data
 {
