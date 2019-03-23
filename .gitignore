@@ -15,11 +15,15 @@
 # For not sharing databse password
 appsettings.json
 
+# Ignoruj migracje
+
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
 [Rr]eleases/
+Migrations/
 x64/
 x86/
 bld/
