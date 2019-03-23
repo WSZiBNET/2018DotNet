@@ -8,19 +8,20 @@ namespace CarRentalGroup3.Models
 {
     public class Car
     {
+        public int Id { get; set; }
         [Required]
-        public string marka { get; set; }
+        public string Marka { get; set; }
         [Required]
-        public string typ { get; set; }
+        public string Typ { get; set; }
         [Required]
         [DataType(DataType.Date)]
-        public DateTime rokProdukcji { get; set; }
+        public DateTime RokProdukcji { get; set; }
         [Required]
-        public string wyposazenie { get; set; }
+        public string Wyposazenie { get; set; }
         [Required]
-        public decimal cenaZaDzien { get; set; }
+        public decimal CenaZaDzien { get; set; }
         [Required]
-        public decimal spalanie { get; set; }
+        public decimal Spalanie { get; set; }
 
     }
 }
