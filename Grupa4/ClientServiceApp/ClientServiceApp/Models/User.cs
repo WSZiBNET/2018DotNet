@@ -17,5 +17,14 @@ namespace ClientServiceApp.Models
         [Required]
         public string PhoneNumber { get; set; }
         public string EmailAddress { get; set; }
+
+        protected User(int id, string name, string surname, string phoneNumber, string emailAddress)
+        {
+            Id = id;
+            Name = name;
+            Surname = surname;
+            PhoneNumber = phoneNumber;
+            EmailAddress = emailAddress;
+        }
     }
 }
