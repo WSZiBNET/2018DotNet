@@ -9,6 +9,7 @@ namespace Movies.Models
 {
     public class Movie
     {
+        [Key]
         public int MovieId { get; set; }
         public string Title { get; set; }
         [DataType(DataType.Date)] // oznacza że ta właściwość potrzebuje tylko date, bez godizny min itp. użytkownik nie musi wpisaywać
