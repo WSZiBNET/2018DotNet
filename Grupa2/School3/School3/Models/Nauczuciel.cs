@@ -8,6 +8,7 @@ namespace School3.Models
 {
     public class Nauczuciel
     {
+        public int id { get; set; }
         public string Imie { get; set; }
         public string Nazwisko { get; set; }
         public string Przedmiot { get; set; }
