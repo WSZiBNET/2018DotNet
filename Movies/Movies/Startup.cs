@@ -36,6 +36,7 @@ namespace Movies
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
 
+            services.AddDbContext<FilmContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc();
         }
 
