@@ -27,7 +27,13 @@ namespace ClientServiceApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("MorfeuszConnection")));
+            services.AddDbContext<ClientContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("MorfeuszConnection")));
+            services.AddDbContext<EmployeeContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("MorfeuszConnection")));
+            services.AddDbContext<SalaryIncreaseContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("MorfeuszConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
