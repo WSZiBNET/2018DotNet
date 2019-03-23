@@ -13,7 +13,7 @@
 *.userprefs
 
 # For not sharing databse password
-appsetiings.json
+**/appsettings.json
 
 # Build results
 [Dd]ebug/
