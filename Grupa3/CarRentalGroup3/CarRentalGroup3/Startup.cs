@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using CarRentalGroup3.Data;
 using CarRentalGroup3.Models;
 using CarRentalGroup3.Services;
+using CarRentalGroup3.DAL;
 
 namespace CarRentalGroup3
 {
@@ -28,6 +29,9 @@ namespace CarRentalGroup3
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<CarRentalContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("CarRentalConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
