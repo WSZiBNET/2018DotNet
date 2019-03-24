@@ -150,9 +150,36 @@ namespace CarRentalGroup3.Controllers
             return _context.Cars.Any(e => e.Id == id);
         }
 
-        public List<Car> CarsListModels(string Marka)
+        // GET: Cars/FindByMarka/5
+        public async Task<IActionResult> FindByMarka(string Id)
         {
-            return (List<Car>)_context.Cars.Where(e => e.Marka == Marka);
+
+            if (Id == null)
+            {
+                return NotFound();
+            }
+
+            //return View(await _context.Cars.ToListAsync());
+            return View(await _context.Cars.Where(e => e.Marka== Id).ToListAsync());
+
+            //return View(await _context.Cars.ToListAsync());
+        }
+
+        // POST: Cars/FindByMarka/5
+        [HttpPost, ActionName("FindByMarka")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> FindCars(string Id)
+        {
+            return View(await _context.Cars.Where(e => e.Marka == Id).ToListAsync());
+        }
+
+
+        // POST: Cars
+        [HttpPost, ActionName("Find")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Find(string Id)
+        {
+            return View(await _context.Cars.Where(e => e.Marka == Id).ToListAsync());
         }
 
     }

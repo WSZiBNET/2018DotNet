@@ -7,59 +7,74 @@
 <h2>Index</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Create New</a> |
+    <a asp-action="FindByMarka">Find by Marka</a>
 </p>
+<div class="row">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label>Marka</label>
+        <input class="form-control" />
+        <span class="text-danger"></span>
+    </div>
+</div>
+<a asp-action="Find" asp-route-id="">Find</a> |
+<div class="form-group">
+    <input type="submit" value="Find Marka" class="btn btn-default" />
+</div>
+
 <table class="table">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Marka)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Typ)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.RokProdukcji)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Wyposazenie)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CenaZaDzien)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Spalanie)
-                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Marka)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Typ)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RokProdukcji)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Wyposazenie)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CenaZaDzien)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Spalanie)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Marka)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Typ)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RokProdukcji)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Wyposazenie)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CenaZaDzien)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Spalanie)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Marka)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Typ)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RokProdukcji)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Wyposazenie)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CenaZaDzien)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Spalanie)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
