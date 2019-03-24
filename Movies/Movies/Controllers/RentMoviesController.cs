@@ -22,8 +22,7 @@ namespace Movies.Controllers
         // GET: RentMovies
         public async Task<IActionResult> Index()
         {
-            var dBContext = _context.RentMovie.Include(r => r.Movie);
-            return View(await dBContext.ToListAsync());
+            return View();
         }
 
         // GET: RentMovies/Details/5
@@ -48,7 +47,7 @@ namespace Movies.Controllers
         // GET: RentMovies/Create
         public IActionResult Create()
         {
-            ViewData["MovieId"] = new SelectList(_context.Movie, "MovieId", "MovieId");
+            ViewData["MovieId"] = new SelectList(_context.Movie, "MovieId", "Title");
             return View();
         }
 
@@ -57,16 +56,18 @@ namespace Movies.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RentMovieId,IsRent,RentDate,RentDays,DayRentPrice,MovieId")] RentMovie rentMovie)
+        public async Task<IActionResult> Create([Bind("RentMovieId,RentDate,RentDays,DayRentPrice,MovieId")] RentMovie rentMovie)
         {
+
             if (ModelState.IsValid)
             {
+                rentMovie.IsRent = true;
                 _context.Add(rentMovie);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(ShowRentedMovies));
             }
-            ViewData["MovieId"] = new SelectList(_context.Movie, "MovieId", "MovieId", rentMovie.MovieId);
-            return View(rentMovie);
+            //ViewData["MovieId"] = new SelectList(_context.Movie, "MovieId", "Name", rentMovie.MovieId);
+            return View("ShowRentedMovies");
         }
 
         // GET: RentMovies/Edit/5
@@ -155,6 +156,12 @@ namespace Movies.Controllers
         private bool RentMovieExists(int id)
         {
             return _context.RentMovie.Any(e => e.RentMovieId == id);
+        }
+
+        public async Task<IActionResult> ShowRentedMovies()
+        {
+            var dBContext = _context.RentMovie.Include(r => r.Movie);
+            return View(await dBContext.ToListAsync());
         }
     }
 }
