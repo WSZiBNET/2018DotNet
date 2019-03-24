@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace School3.Data
 {
-    public class NauczucielContext : DbContext
+    public class NauczycielContext : DbContext
     {
-        public NauczucielContext(DbContextOptions<NauczucielContext> options) : base(options)
+        public NauczycielContext(DbContextOptions<NauczycielContext> options) : base(options)
         {
 
         }
 
-        public DbSet<Nauczuciel> Nauczyciel { get; set; }
+        public DbSet<Nauczyciel> Nauczyciel { get; set; }
     }
 }

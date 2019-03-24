@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace School3.Models
 {
-    public class Nauczuciel
+    public class Nauczyciel
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

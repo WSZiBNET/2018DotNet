@@ -25,7 +25,7 @@ namespace School3
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDbContext<NauczucielContext>(options =>
+            services.AddDbContext<NauczycielContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDbContext<PrzedmiotContext>(options =>
