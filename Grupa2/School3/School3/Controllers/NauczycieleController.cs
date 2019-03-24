@@ -5,18 +5,27 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using School3.Data;
 using School3.Models;
+
+
+
+
+
 
 namespace School3.Controllers
 {
     public class NauczycieleController : Controller
     {
         private readonly NauczycielContext _context;
+        private readonly PrzedmiotContext _db;
 
-        public NauczycieleController(NauczycielContext context)
+
+        public NauczycieleController(NauczycielContext context, PrzedmiotContext db)
         {
             _context = context;
+            _db = db;
         }
 
         // GET: Nauczyciele
@@ -46,6 +55,7 @@ namespace School3.Controllers
         // GET: Nauczyciele/Create
         public IActionResult Create()
         {
+            PrzedmiotyDropDownList();
             return View();
         }
 
@@ -56,13 +66,34 @@ namespace School3.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("id,Imie,Nazwisko,PrzedmiotId")] Nauczyciel nauczyciel)
         {
-            if (ModelState.IsValid)
+            //###############################################################
+
+            //if (ModelState.IsValid)
+            //{
+            //    _context.Add(nauczyciel);
+            //    await _context.SaveChangesAsync();
+            //    return RedirectToAction(nameof(Index));
+            //}
+            //return View(nauczyciel);
+            //##################################################################
+            try
             {
-                _context.Add(nauczyciel);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(nauczyciel);
+                    _context.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
+            catch (RetryLimitExceededException /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.)
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+            }
+            PrzedmiotyDropDownList(nauczyciel.PrzedmiotId);
             return View(nauczyciel);
+
+            //##################################################################
         }
 
         // GET: Nauczyciele/Edit/5
@@ -149,5 +180,20 @@ namespace School3.Controllers
         {
             return _context.Nauczyciel.Any(e => e.id == id);
         }
+
+
+        public void PrzedmiotyDropDownList(object selectedPrzedmiot = null)
+        {
+     
+            var przedmiotyQuery = from d in _db.Przedmiot
+                                  orderby d.Nazwa
+                                  select d;
+            ViewBag.PrzedmiotId = new SelectList(przedmiotyQuery, "id", "Nazwa", selectedPrzedmiot);
+        }
+
     }
+
+
+
+
 }
