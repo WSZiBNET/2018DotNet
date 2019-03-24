@@ -25,13 +25,17 @@
             </div>
             <div class="form-group">
                 <label asp-for="PrzedmiotId" class="control-label"></label>
-                <input asp-for="PrzedmiotId" class="form-control" />
-                <span asp-validation-for="PrzedmiotId" class="text-danger"></span>
+                
+                <div class="form-group">
+                    @Html.DropDownList("PrzedmiotId", String.Empty)
+                    @Html.ValidationMessageFor(model => model.PrzedmiotId)
+                    
+                </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </form>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+</form>
     </div>
 </div>
 

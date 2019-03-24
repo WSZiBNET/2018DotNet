@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -30,7 +31,11 @@ namespace School3.Controllers
 
         // GET: Nauczyciele
         public async Task<IActionResult> Index()
+        //public IActionResult Index()
         {
+            
+            //var nauczyciele = _context.Nauczyciel.Include(c => c.PrzedmiotId);
+            //return View(nauczyciele.ToList());
             return View(await _context.Nauczyciel.ToListAsync());
         }
 
@@ -49,6 +54,7 @@ namespace School3.Controllers
                 return NotFound();
             }
 
+       
             return View(nauczyciel);
         }
 
@@ -66,16 +72,7 @@ namespace School3.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("id,Imie,Nazwisko,PrzedmiotId")] Nauczyciel nauczyciel)
         {
-            //###############################################################
 
-            //if (ModelState.IsValid)
-            //{
-            //    _context.Add(nauczyciel);
-            //    await _context.SaveChangesAsync();
-            //    return RedirectToAction(nameof(Index));
-            //}
-            //return View(nauczyciel);
-            //##################################################################
             try
             {
                 if (ModelState.IsValid)
@@ -109,6 +106,7 @@ namespace School3.Controllers
             {
                 return NotFound();
             }
+            PrzedmiotyDropDownList(nauczyciel.PrzedmiotId);
             return View(nauczyciel);
         }
 
@@ -144,6 +142,7 @@ namespace School3.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            PrzedmiotyDropDownList(nauczyciel.PrzedmiotId);
             return View(nauczyciel);
         }
 
@@ -152,6 +151,7 @@ namespace School3.Controllers
         {
             if (id == null)
             {
+              
                 return NotFound();
             }
 
@@ -161,7 +161,7 @@ namespace School3.Controllers
             {
                 return NotFound();
             }
-
+                       
             return View(nauczyciel);
         }
 
