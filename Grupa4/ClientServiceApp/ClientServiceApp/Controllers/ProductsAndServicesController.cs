@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using ClientServiceApp.Data;
 using ClientServiceApp.Models.ProductsAndServices;
 using System.Collections;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ClientServiceApp.Controllers
 {
+    
     public class ProductsAndServicesController : Controller
     {
         private readonly ProductsAndServicesContext _context;
@@ -86,6 +88,7 @@ namespace ClientServiceApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Employee")]
         public async Task<IActionResult> Create([Bind("Id,Name,Price,Category")] ProductsAndServices productsAndServices)
         {
             if (ModelState.IsValid)
@@ -98,6 +101,7 @@ namespace ClientServiceApp.Controllers
         }
 
         // GET: ProductsAndServices/Edit/5
+        [Authorize(Roles = "Admin, Employee")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -118,6 +122,7 @@ namespace ClientServiceApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Employee")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,Category")] ProductsAndServices productsAndServices)
         {
             if (id != productsAndServices.Id)
@@ -149,6 +154,7 @@ namespace ClientServiceApp.Controllers
         }
 
         // GET: ProductsAndServices/Delete/5
+        [Authorize(Roles = "Admin, Employee")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -169,6 +175,7 @@ namespace ClientServiceApp.Controllers
         // POST: ProductsAndServices/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Employee")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var productsAndServices = await _context.Products.SingleOrDefaultAsync(m => m.Id == id);
