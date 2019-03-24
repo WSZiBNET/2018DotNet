@@ -7,6 +7,7 @@ namespace ClientServiceApp.Models
 {
     public class SalaryIncrease
     {
+        public int Id { get; set; }
         public int EmployeeID { get; set; }
         public int IncreaseID { get; set; }
         public decimal IncreaseValue { get; set; }
