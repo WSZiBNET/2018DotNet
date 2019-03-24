@@ -14,7 +14,7 @@ namespace Movies.Models
         public string Title { get; set; }
         [DataType(DataType.Date)] // oznacza że ta właściwość potrzebuje tylko date, bez godizny min itp. użytkownik nie musi wpisaywać
         public DateTime ProductionDate { get; set; }
-        public float Price { get; set; }
+       
         public string MovieDescription { get; set; }
 
         [ForeignKey("Genres")]
@@ -25,6 +25,10 @@ namespace Movies.Models
         public int AuthorId { get; set; }
         public virtual Author Author { get; set; }
 
+        public virtual ICollection<Reviews> Reviews { get; set; }
 
+        public virtual RentMovie RentMovie { get; set; }
+
+        public virtual ICollection<Reservation> Reservation { get; set; }
     }
 }

@@ -11,9 +11,10 @@ using System;
 namespace Movies.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20190324085555_nowa5")]
+    partial class nowa5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -70,53 +71,6 @@ namespace Movies.Migrations
                     b.ToTable("Movie");
                 });
 
-            modelBuilder.Entity("Movies.Models.RentMovie", b =>
-                {
-                    b.Property<int>("RentMovieId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<float>("DayRentPrice");
-
-                    b.Property<bool>("IsRent");
-
-                    b.Property<bool>("IsReserved");
-
-                    b.Property<int>("MovieId");
-
-                    b.Property<DateTime>("RentDate");
-
-                    b.Property<int>("RentDays");
-
-                    b.Property<int>("ReservedDays");
-
-                    b.HasKey("RentMovieId");
-
-                    b.HasIndex("MovieId")
-                        .IsUnique();
-
-                    b.ToTable("RentMovie");
-                });
-
-            modelBuilder.Entity("Movies.Models.Reservation", b =>
-                {
-                    b.Property<int>("ReservationId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("IsReserved");
-
-                    b.Property<int>("MovieId");
-
-                    b.Property<DateTime>("ReservedDate");
-
-                    b.Property<int>("ReservedDays");
-
-                    b.HasKey("ReservationId");
-
-                    b.HasIndex("MovieId");
-
-                    b.ToTable("Reservation");
-                });
-
             modelBuilder.Entity("Movies.Models.Reviews", b =>
                 {
                     b.Property<int>("ReviewId")
@@ -143,22 +97,6 @@ namespace Movies.Migrations
                     b.HasOne("Movies.Models.Genres", "Genres")
                         .WithMany("Movies")
                         .HasForeignKey("GenreId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Movies.Models.RentMovie", b =>
-                {
-                    b.HasOne("Movies.Models.Movie", "Movie")
-                        .WithOne("RentMovie")
-                        .HasForeignKey("Movies.Models.RentMovie", "MovieId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Movies.Models.Reservation", b =>
-                {
-                    b.HasOne("Movies.Models.Movie", "Movie")
-                        .WithMany("Reservation")
-                        .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
