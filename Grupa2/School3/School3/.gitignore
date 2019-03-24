@@ -17,7 +17,7 @@
 appsettings.json
 
 # Build results
-Data.Migrations
+Migrations
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
