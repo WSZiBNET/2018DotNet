@@ -11,5 +11,6 @@ namespace School3.Data
         }
 
         public DbSet<Nauczyciel> Nauczyciel { get; set; }
+
     }
 }
