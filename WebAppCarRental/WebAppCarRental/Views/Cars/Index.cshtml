@@ -1,0 +1,80 @@
+﻿@model IEnumerable<WebAppCarRental.Models.Car>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+
+<div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+        <li><a asp-action="Create">Create New</a></li>
+    </ul>
+</div>
+
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by name: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-default" /> |
+            <a asp-action="Index">Back to Full List</a>
+        </p>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["MarkaSortParm"]">@Html.DisplayNameFor(model => model.Marka)</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["TypSortParm"]">@Html.DisplayNameFor(model => model.Typ)</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["RokProdukcjiSortParm"]">@Html.DisplayNameFor(model => model.RokProdukcji)</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["WyposazenieSortParm"]">@Html.DisplayNameFor(model => model.Wyposazenie)</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["CenaZaDzienSortParm"]">@Html.DisplayNameFor(model => model.CenaZaDzien)</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["SpalanieSortParm"]">@Html.DisplayNameFor(model => model.Spalanie)</a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Marka)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Typ)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RokProdukcji)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Wyposazenie)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CenaZaDzien)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Spalanie)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
