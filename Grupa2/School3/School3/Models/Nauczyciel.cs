@@ -7,12 +7,17 @@ using System.Threading.Tasks;
 
 namespace School3.Models
 {
-    public class Przedmiot
+    public class Nauczyciel
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
-        public string Nazwa { get; set; }
-        public string Opis { get; set; }
+        public string Imie { get; set; }
+        public string Nazwisko { get; set; }
+
+        [ForeignKey("Przedmiot")]
+        public int PrzedmiotId { get; set; }
+
+
     }
 }
