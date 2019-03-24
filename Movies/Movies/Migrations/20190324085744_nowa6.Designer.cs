@@ -11,9 +11,10 @@ using System;
 namespace Movies.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20190324085744_nowa6")]
+    partial class nowa6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,8 +92,7 @@ namespace Movies.Migrations
 
                     b.HasKey("RentMovieId");
 
-                    b.HasIndex("MovieId")
-                        .IsUnique();
+                    b.HasIndex("MovieId");
 
                     b.ToTable("RentMovie");
                 });
@@ -149,15 +149,15 @@ namespace Movies.Migrations
             modelBuilder.Entity("Movies.Models.RentMovie", b =>
                 {
                     b.HasOne("Movies.Models.Movie", "Movie")
-                        .WithOne("RentMovie")
-                        .HasForeignKey("Movies.Models.RentMovie", "MovieId")
+                        .WithMany()
+                        .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Movies.Models.Reservation", b =>
                 {
                     b.HasOne("Movies.Models.Movie", "Movie")
-                        .WithMany("Reservation")
+                        .WithMany()
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

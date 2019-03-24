@@ -15,5 +15,9 @@ namespace Movies.Data
         public DbSet<Movie> Movie { get; set; }
         public DbSet<Genres> Genres { get; set; }
         public DbSet<Author> Author { get; set; }
+        public DbSet<Reviews> Reviews { get; set; }
+        public DbSet<RentMovie> RentMovie { get; set; }
+        public DbSet<Reservation> Reservation { get; set; }
+
     }
 }
