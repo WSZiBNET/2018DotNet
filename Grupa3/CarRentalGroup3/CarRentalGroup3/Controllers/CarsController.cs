@@ -150,10 +150,9 @@ namespace CarRentalGroup3.Controllers
             return _context.Cars.Any(e => e.Id == id);
         }
 
-        //public static void ()
+        public List<Car> CarsListModels(string Marka)
         {
-            List<Car> markaCars = new List<Car>(marka);
-            return _context.Cars.Where(e => e.Marka == marka);
+            return (List<Car>)_context.Cars.Where(e => e.Marka == Marka);
         }
 
     }
