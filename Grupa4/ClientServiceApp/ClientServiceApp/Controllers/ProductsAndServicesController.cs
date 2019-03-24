@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ClientServiceApp.Data;
 using ClientServiceApp.Models.ProductsAndServices;
+using System.Collections;
 
 namespace ClientServiceApp.Controllers
 {
@@ -152,9 +153,13 @@ namespace ClientServiceApp.Controllers
 
         public async Task<IActionResult> GetItemByName (string name)
         {
-            var items = _context.Products.SingleOrDefault(c => c.Name == name);
-            //return View(items);
-            return View(await _context.Products.Single<items>);
+            //List items
+            var item = await _context.Products.Where(c => c.Name == name).ToListAsync();
+            if (item == null)
+                return Content("not found");
+
+            return View(item);
+            //return View(await _context.Products.Single<items>);
         }
     }
 }
