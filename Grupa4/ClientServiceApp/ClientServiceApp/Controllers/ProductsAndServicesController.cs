@@ -16,13 +16,44 @@ namespace ClientServiceApp.Controllers
 
         public ProductsAndServicesController(ProductsAndServicesContext context)
         {
-            _context = context;
+             _context = context;
         }
 
         // GET: ProductsAndServices
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            return View(await _context.Products.ToListAsync());
+            //return View(await _context.Products.ToListAsync());
+
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
+            ViewData["CategorySortParm"] = sortOrder == "Category" ? "category_desc" : "Category";
+           
+            var items = from s in _context.Products
+                           select s;
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    items = items.OrderByDescending(s => s.Name);
+                    break;
+                case "Category":
+                    items = items.OrderBy(s => s.Category);
+                    break;
+                case "category_desc":
+                    items = items.OrderByDescending(s => s.Category);
+                    break;
+                case "Price":
+                    items = items.OrderBy(s => s.Price);
+                    break;
+                case "price_desc":
+                    items = items.OrderByDescending(s => s.Price);
+                    break;
+
+
+                default:
+                    items = items.OrderBy(s => s.Id);
+                    break;
+            }
+            return View(await items.AsNoTracking().ToListAsync());
         }
 
         // GET: ProductsAndServices/Details/5
@@ -150,11 +181,11 @@ namespace ClientServiceApp.Controllers
             return _context.Products.Any(e => e.Id == id);
         }
 
-        public async Task<IActionResult> GetItemByName (string name)
-        {
-            var items = _context.Products.SingleOrDefault(c => c.Name == name);
+        //public async Task<IActionResult> GetItemByName (string name)
+        //{
+           // var items = _context.Products.SingleOrDefault(c => c.Name == name);
             //return View(items);
-            return View(await _context.Products.Single<items>);
-        }
+            //return View(await _context.Products.Single<items>);
+       // }
     }
 }
