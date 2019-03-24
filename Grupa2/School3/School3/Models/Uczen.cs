@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace School3.Models
 {
     public class Uczen
     {
+        [Required]
         public string Imie { get; set; }
         public string Nazwisko { get; set; }
         public int Rocznik { get; set; }
