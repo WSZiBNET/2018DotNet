@@ -13,10 +13,12 @@ namespace School3.Controllers
     public class PrzedmiotyController : Controller
     {
         private readonly PrzedmiotContext _context;
+        
 
         public PrzedmiotyController(PrzedmiotContext context)
         {
             _context = context;
+         
         }
 
         // GET: Przedmioty
@@ -149,5 +151,9 @@ namespace School3.Controllers
         {
             return _context.Przedmiot.Any(e => e.id == id);
         }
+
+
+
     }
+
 }
