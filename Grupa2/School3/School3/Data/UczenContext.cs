@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using School3.Models;
 
 namespace School3.Data
 {
@@ -9,6 +10,6 @@ namespace School3.Data
 
         }
 
-        public DbSet<Models.Uczen> Uczen { get; set; }
+        public DbSet<Uczen> Uczen { get; set; }
     }
 }
