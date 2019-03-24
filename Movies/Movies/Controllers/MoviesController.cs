@@ -49,8 +49,8 @@ namespace Movies.Controllers
         // GET: Movies/Create
         public IActionResult Create()
         {
-            ViewData["AuthorId"] = new SelectList(_context.Author, "AuthorId", "AuthorId");
-            ViewData["GenreId"] = new SelectList(_context.Genres, "GenreId", "GenreId");
+            ViewData["AuthorId"] = new SelectList(_context.Author, "AuthorId","FullName");
+            ViewData["GenreId"] = new SelectList(_context.Genres, "GenreId", "Name");
             return View();
         }
 
