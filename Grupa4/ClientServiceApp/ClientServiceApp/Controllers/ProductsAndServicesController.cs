@@ -21,16 +21,33 @@ namespace ClientServiceApp.Controllers
         }
 
         // GET: ProductsAndServices
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index(string sortOrder, string searchString, int? searchInt)
         {
             //return View(await _context.Products.ToListAsync());
 
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
             ViewData["CategorySortParm"] = sortOrder == "Category" ? "category_desc" : "Category";
-           
+            ViewData["CurrentFilter"] = searchString;
+            ViewData["CurrentFilter2"] = searchInt;
+
+
+
             var items = from s in _context.Products
                            select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                items = items.Where(s => s.Name.Contains(searchString));
+                               
+            }
+
+            if (searchInt!=null)
+            {
+                items = items.Where(s => s.Category.Equals(searchInt));
+                               
+            }
+
+
             switch (sortOrder)
             {
                 case "name_desc":
