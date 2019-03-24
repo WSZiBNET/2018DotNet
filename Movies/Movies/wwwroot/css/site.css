@@ -19,6 +19,7 @@
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"] {
     width: 100%;
+    
 }
 
 /* QR code generator */
@@ -32,4 +33,11 @@
     .carousel-caption {
         display: none;
     }
+}
+.listaFilmy {
+    list-style: none;
+}
+
+.liFilmy {
+    padding-top: 3px;
 }
