@@ -32,8 +32,8 @@
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Nauczyciele">Nauczyciele</a></li>
-                    <li><a asp-area="" asp-controller="Przedmioty">Przedmioty</a></li>
+                    <li><a asp-area="" asp-controller="Nauczyciele" asp-action="">Nauczyciele</a></li>
+                    <li><a asp-area="" asp-controller="Przedmioty" asp-action="">Przedmioty</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
