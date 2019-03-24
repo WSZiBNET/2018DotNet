@@ -10,23 +10,23 @@ using Movies.Models;
 
 namespace Movies.Controllers
 {
-    public class MoviesController : Controller
+    public class RentMoviesController : Controller
     {
         private readonly DBContext _context;
 
-        public MoviesController(DBContext context)
+        public RentMoviesController(DBContext context)
         {
             _context = context;
         }
 
-        // GET: Movies
+        // GET: RentMovies
         public async Task<IActionResult> Index()
         {
-            var dBContext = _context.Movie.Include(m => m.Author).Include(m => m.Genres);
+            var dBContext = _context.RentMovie.Include(r => r.Movie);
             return View(await dBContext.ToListAsync());
         }
 
-        // GET: Movies/Details/5
+        // GET: RentMovies/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,45 +34,42 @@ namespace Movies.Controllers
                 return NotFound();
             }
 
-            var movie = await _context.Movie
-                .Include(m => m.Author)
-                .Include(m => m.Genres)
-                .SingleOrDefaultAsync(m => m.MovieId == id);
-            if (movie == null)
+            var rentMovie = await _context.RentMovie
+                .Include(r => r.Movie)
+                .SingleOrDefaultAsync(m => m.RentMovieId == id);
+            if (rentMovie == null)
             {
                 return NotFound();
             }
 
-            return View(movie);
+            return View(rentMovie);
         }
 
-        // GET: Movies/Create
+        // GET: RentMovies/Create
         public IActionResult Create()
         {
-            ViewData["AuthorId"] = new SelectList(_context.Author, "AuthorId", "AuthorId");
-            ViewData["GenreId"] = new SelectList(_context.Genres, "GenreId", "GenreId");
+            ViewData["MovieId"] = new SelectList(_context.Movie, "MovieId", "MovieId");
             return View();
         }
 
-        // POST: Movies/Create
+        // POST: RentMovies/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MovieId,Title,ProductionDate,MovieDescription,GenreId,AuthorId")] Movie movie)
+        public async Task<IActionResult> Create([Bind("RentMovieId,IsRent,RentDate,RentDays,DayRentPrice,MovieId")] RentMovie rentMovie)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(movie);
+                _context.Add(rentMovie);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AuthorId"] = new SelectList(_context.Author, "AuthorId", "AuthorId", movie.AuthorId);
-            ViewData["GenreId"] = new SelectList(_context.Genres, "GenreId", "GenreId", movie.GenreId);
-            return View(movie);
+            ViewData["MovieId"] = new SelectList(_context.Movie, "MovieId", "MovieId", rentMovie.MovieId);
+            return View(rentMovie);
         }
 
-        // GET: Movies/Edit/5
+        // GET: RentMovies/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -80,24 +77,23 @@ namespace Movies.Controllers
                 return NotFound();
             }
 
-            var movie = await _context.Movie.SingleOrDefaultAsync(m => m.MovieId == id);
-            if (movie == null)
+            var rentMovie = await _context.RentMovie.SingleOrDefaultAsync(m => m.RentMovieId == id);
+            if (rentMovie == null)
             {
                 return NotFound();
             }
-            ViewData["AuthorId"] = new SelectList(_context.Author, "AuthorId", "AuthorId", movie.AuthorId);
-            ViewData["GenreId"] = new SelectList(_context.Genres, "GenreId", "GenreId", movie.GenreId);
-            return View(movie);
+            ViewData["MovieId"] = new SelectList(_context.Movie, "MovieId", "MovieId", rentMovie.MovieId);
+            return View(rentMovie);
         }
 
-        // POST: Movies/Edit/5
+        // POST: RentMovies/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MovieId,Title,ProductionDate,MovieDescription,GenreId,AuthorId")] Movie movie)
+        public async Task<IActionResult> Edit(int id, [Bind("RentMovieId,IsRent,RentDate,RentDays,DayRentPrice,MovieId")] RentMovie rentMovie)
         {
-            if (id != movie.MovieId)
+            if (id != rentMovie.RentMovieId)
             {
                 return NotFound();
             }
@@ -106,12 +102,12 @@ namespace Movies.Controllers
             {
                 try
                 {
-                    _context.Update(movie);
+                    _context.Update(rentMovie);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MovieExists(movie.MovieId))
+                    if (!RentMovieExists(rentMovie.RentMovieId))
                     {
                         return NotFound();
                     }
@@ -122,12 +118,11 @@ namespace Movies.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AuthorId"] = new SelectList(_context.Author, "AuthorId", "AuthorId", movie.AuthorId);
-            ViewData["GenreId"] = new SelectList(_context.Genres, "GenreId", "GenreId", movie.GenreId);
-            return View(movie);
+            ViewData["MovieId"] = new SelectList(_context.Movie, "MovieId", "MovieId", rentMovie.MovieId);
+            return View(rentMovie);
         }
 
-        // GET: Movies/Delete/5
+        // GET: RentMovies/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -135,32 +130,31 @@ namespace Movies.Controllers
                 return NotFound();
             }
 
-            var movie = await _context.Movie
-                .Include(m => m.Author)
-                .Include(m => m.Genres)
-                .SingleOrDefaultAsync(m => m.MovieId == id);
-            if (movie == null)
+            var rentMovie = await _context.RentMovie
+                .Include(r => r.Movie)
+                .SingleOrDefaultAsync(m => m.RentMovieId == id);
+            if (rentMovie == null)
             {
                 return NotFound();
             }
 
-            return View(movie);
+            return View(rentMovie);
         }
 
-        // POST: Movies/Delete/5
+        // POST: RentMovies/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var movie = await _context.Movie.SingleOrDefaultAsync(m => m.MovieId == id);
-            _context.Movie.Remove(movie);
+            var rentMovie = await _context.RentMovie.SingleOrDefaultAsync(m => m.RentMovieId == id);
+            _context.RentMovie.Remove(rentMovie);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MovieExists(int id)
+        private bool RentMovieExists(int id)
         {
-            return _context.Movie.Any(e => e.MovieId == id);
+            return _context.RentMovie.Any(e => e.RentMovieId == id);
         }
     }
 }

@@ -11,8 +11,6 @@ namespace Movies.Models
     {
         public int RentMovieId { get; set; }
         public bool IsRent { get; set; }
-        public bool IsReserved { get; set; }
-        public int ReservedDays { get; set; }
         [DataType(DataType.Date)] // oznacza że ta właściwość potrzebuje tylko date, bez godizny min itp. użytkownik nie musi wpisaywać
         public DateTime RentDate { get; set; }
         public int RentDays { get; set; }

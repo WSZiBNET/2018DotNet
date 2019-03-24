@@ -12,6 +12,7 @@ namespace Movies.Models
         [Key]
         public int ReviewId { get; set; }
         public string Review { get; set; }
+        public int Rate { get; set; }
 
         [ForeignKey("Movie")]
         public int MovieId { get; set; }
