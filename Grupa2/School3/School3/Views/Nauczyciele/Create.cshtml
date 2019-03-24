@@ -24,7 +24,15 @@
             </div>
             <div class="form-group">
                 <label asp-for="PrzedmiotId" class="control-label"></label>
-                <input asp-for="PrzedmiotId" class="form-control" />
+
+                @*<input asp-for="PrzedmiotId" class="form-control" />*@
+
+                <div class="form-group">
+                    @Html.DropDownList("PrzedmiotId", String.Empty)
+                    @Html.ValidationMessageFor(model => model.PrzedmiotId)
+                    
+                </div>
+
                 <span asp-validation-for="PrzedmiotId" class="text-danger"></span>
             </div>
             <div class="form-group">
