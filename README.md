@@ -4,6 +4,6 @@ Ważne! - Dodałem połączenie do zewnęrznej bazy danych żebyśmy mogli sobie
 
 Dane do logowania porpzez Management Studio:
 
-Nazwa serwera: lkazimie.mssql.somee.com
+<p>Nazwa serwera: lkazimie.mssql.somee.com</p>
 Login name:	lukasz82_SQLLogin_1
 Login password:	418fjse1c7
