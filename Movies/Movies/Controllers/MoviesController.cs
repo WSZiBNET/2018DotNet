@@ -32,7 +32,6 @@ namespace Movies.Controllers
 
             if (searchGenreName != null)
             {
-
                 int genreId = (from g in _context.Genres where g.Name.Contains(searchGenreName) select g.GenreId).SingleOrDefault();
 
                 var genres = (from m in _context.Movie.Include(m => m.Author).Include(m => m.Genres) where m.GenreId.Equals(genreId) select m).ToList();
@@ -41,24 +40,51 @@ namespace Movies.Controllers
 
             if (searchAuthorName != null)
             {
+                if (searchAuthorName.Split(' ').Length > 1)
+                {
+                    var auth = searchAuthorName.Split(' ');
+                    int[] authorsId = (from a in _context.Author
+                                       where
+                                       a.Name.ToLower().Contains(auth[0].ToLower()) &&
+                                       a.Surname.ToLower().Contains(auth[1].ToLower()) ||
+                                       a.Name.ToLower().Contains(auth[1].ToLower()) &&
+                                       a.Surname.ToLower().Contains(auth[0].ToLower())
+                                       select a.AuthorId
+                        ).ToArray();
 
-                int authorId = (from a in _context.Author where a.Name.Contains(searchAuthorName) && a.Surname.Contains(searchAuthorName) select a.AuthorId).SingleOrDefault();
+                    List<Movie> m = new List<Movie>();
 
-                var authors = (from a in _context.Movie.Include(a => a.Author).Include(a => a.Genres) where a.GenreId.Equals(authorId) select a).ToList();
-                return View(authors);
+                    for (int i = 0; i < authorsId.Length; i++)
+                    {
+                        var authors = _context.Movie.Include
+                                         (a => a.Author)
+                                         .Include(a => a.Genres)
+                                         .Where(a => a.AuthorId.Equals(authorsId[i]))
+                                         .Select(a => a).ToList();
+
+                        foreach (var item in authors)
+                        {
+                            if (item != null) { m.Add(item); }
+                        }
+                        authors = null;
+                    }
+
+                    return View(m.ToList());
+                }
+                else if (searchAuthorName.Split(' ').Length == 1)
+                {
+                    var movieAuthors = _context.Movie.Include
+                    (a => a.Author)
+                    .Include(a => a.Genres)
+                    .Where(a => a.Author.Name.ToLower().Equals(searchAuthorName.ToLower()) || a.Author.Surname.ToLower().Equals(searchAuthorName.ToLower()))
+                    .Select(a => a).ToList();
+                    return View(movieAuthors);
+                }
             }
 
             ViewBag.serach = searchMovieName;
             var dBContext = _context.Movie.Include(m => m.Author).Include(m => m.Genres);
             return View(await dBContext.ToListAsync());
-            //var movies = from m in _context.Movie
-            //             select m;
-
-            //if (!String.IsNullOrEmpty(id))
-            //{
-            //    movies = movies.Where(s => s.Title.Contains(id));
-            //}
-
             //return View(await movies.ToListAsync());
         }
 
