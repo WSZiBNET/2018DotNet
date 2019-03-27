@@ -19,11 +19,26 @@ namespace Movies.Controllers
             _context = context;
         }
 
-
-
         // GET: Movies
-        public async Task<IActionResult> Index(string searchMovieName, string searchGenreName, string searchAuthorName)
+        public async Task<IActionResult> Index(string searchMovieName, string searchGenreName, string searchAuthorName, bool productionDate)
         {
+            if (searchAuthorName != null || searchGenreName != null || searchMovieName != null)
+            {
+            } else
+            {
+                if (productionDate == true)
+                {
+                    var movies = (from m in _context.Movie.Include(m => m.Author).Include(m => m.Genres) orderby m.ProductionDate select m).ToList();
+                    ViewBag.productionDate = false;
+                    return View(movies);
+                } else if (productionDate == false)
+                {
+                    var movies = (from m in _context.Movie.Include(m => m.Author).Include(m => m.Genres) orderby m.ProductionDate descending select m).ToList();
+                    ViewBag.productionDate = true;
+                    return View(movies);
+                }
+            }
+            
             if (searchMovieName != null)
             {
                 var movies = (from m in _context.Movie.Include(m => m.Author).Include(m => m.Genres) where m.Title.Contains(searchMovieName) select m).ToList();
