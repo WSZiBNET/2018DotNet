@@ -239,5 +239,26 @@ namespace Movies.Controllers
         {
             return _context.Movie.Any(e => e.MovieId == id);
         }
+
+        public async Task<IActionResult> SearchByDate(DateTime searchByDateFrom, DateTime searchByDateTo)
+        {
+            List<Movie> dBContext = new List<Movie>();
+
+            if (searchByDateFrom != null && searchByDateTo.Year == 0001)
+            {
+                 dBContext = _context.Movie.Include(m => m.Author).Include(m => m.Genres).Where(m => m.ProductionDate >= searchByDateFrom).OrderBy(m => m.ProductionDate).ToList();
+                 return View("Index", dBContext);
+            }
+
+            if (searchByDateFrom.Year == 0001 && searchByDateTo != null)
+            {
+                 dBContext = _context.Movie.Include(m => m.Author).Include(m => m.Genres).Where(m => m.ProductionDate <= searchByDateTo).OrderBy(m => m.ProductionDate).ToList();
+                 return View("Index", dBContext);
+            }
+            dBContext = _context.Movie.Include(m => m.Author).Include(m => m.Genres).Where(m => m.ProductionDate >= searchByDateFrom && m.ProductionDate <= searchByDateTo).OrderBy(m => m.ProductionDate).ToList();
+            return View("Index", dBContext);
+            //return View("Index");
+        }
+
     }
 }
