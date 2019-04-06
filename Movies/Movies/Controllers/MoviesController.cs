@@ -20,8 +20,11 @@ namespace Movies.Controllers
         }
 
         // GET: Movies
-        public async Task<IActionResult> Index(string searchMovieName, string searchGenreName, string searchAuthorName, bool productionDate)
+        public async Task<IActionResult> Index(string searchMovieName, string searchGenreName, string searchAuthorName, bool productionDate, int? page)
         {
+            int pages;
+            const int maxElementsOnAPage = 5;
+
             if (searchAuthorName != null || searchGenreName != null || searchMovieName != null)
             {
             } else
@@ -97,8 +100,9 @@ namespace Movies.Controllers
                 }
             }
 
-            ViewBag.serach = searchMovieName;
             var dBContext = _context.Movie.Include(m => m.Author).Include(m => m.Genres);
+            pages = dBContext.Count() / maxElementsOnAPage;
+            ViewBag.pages = pages;
             return View(await dBContext.ToListAsync());
             //return View(await movies.ToListAsync());
         }
@@ -246,16 +250,16 @@ namespace Movies.Controllers
 
             if (searchByDateFrom != null && searchByDateTo.Year == 0001)
             {
-                 dBContext = _context.Movie.Include(m => m.Author).Include(m => m.Genres).Where(m => m.ProductionDate >= searchByDateFrom).OrderBy(m => m.ProductionDate).ToList();
+                 dBContext = await _context.Movie.Include(m => m.Author).Include(m => m.Genres).Where(m => m.ProductionDate >= searchByDateFrom).OrderBy(m => m.ProductionDate).ToListAsync();
                  return View("Index", dBContext);
             }
 
             if (searchByDateFrom.Year == 0001 && searchByDateTo != null)
             {
-                 dBContext = _context.Movie.Include(m => m.Author).Include(m => m.Genres).Where(m => m.ProductionDate <= searchByDateTo).OrderBy(m => m.ProductionDate).ToList();
+                 dBContext = await _context.Movie.Include(m => m.Author).Include(m => m.Genres).Where(m => m.ProductionDate <= searchByDateTo).OrderBy(m => m.ProductionDate).ToListAsync();
                  return View("Index", dBContext);
             }
-            dBContext = _context.Movie.Include(m => m.Author).Include(m => m.Genres).Where(m => m.ProductionDate >= searchByDateFrom && m.ProductionDate <= searchByDateTo).OrderBy(m => m.ProductionDate).ToList();
+            dBContext = await _context.Movie.Include(m => m.Author).Include(m => m.Genres).Where(m => m.ProductionDate >= searchByDateFrom && m.ProductionDate <= searchByDateTo).OrderBy(m => m.ProductionDate).ToListAsync();
             return View("Index", dBContext);
             //return View("Index");
         }
