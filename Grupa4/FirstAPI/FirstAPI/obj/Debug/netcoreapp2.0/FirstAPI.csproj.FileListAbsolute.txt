@@ -1,0 +1,11 @@
+C:\Users\Student\source\repos\FirstAPI\FirstAPI\bin\Debug\netcoreapp2.0\FirstAPI.deps.json
+C:\Users\Student\source\repos\FirstAPI\FirstAPI\bin\Debug\netcoreapp2.0\FirstAPI.runtimeconfig.json
+C:\Users\Student\source\repos\FirstAPI\FirstAPI\bin\Debug\netcoreapp2.0\FirstAPI.runtimeconfig.dev.json
+C:\Users\Student\source\repos\FirstAPI\FirstAPI\bin\Debug\netcoreapp2.0\FirstAPI.dll
+C:\Users\Student\source\repos\FirstAPI\FirstAPI\obj\Debug\netcoreapp2.0\FirstAPI.csprojAssemblyReference.cache
+C:\Users\Student\source\repos\FirstAPI\FirstAPI\obj\Debug\netcoreapp2.0\FirstAPI.csproj.CoreCompileInputs.cache
+C:\Users\Student\source\repos\FirstAPI\FirstAPI\obj\Debug\netcoreapp2.0\FirstAPI.AssemblyInfoInputs.cache
+C:\Users\Student\source\repos\FirstAPI\FirstAPI\obj\Debug\netcoreapp2.0\FirstAPI.AssemblyInfo.cs
+C:\Users\Student\source\repos\FirstAPI\FirstAPI\bin\Debug\netcoreapp2.0\FirstAPI.pdb
+C:\Users\Student\source\repos\FirstAPI\FirstAPI\obj\Debug\netcoreapp2.0\FirstAPI.dll
+C:\Users\Student\source\repos\FirstAPI\FirstAPI\obj\Debug\netcoreapp2.0\FirstAPI.pdb
