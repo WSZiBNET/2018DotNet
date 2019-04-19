@@ -33,6 +33,11 @@ namespace Movies
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("WymagajManagera", policy => policy.RequireRole("Admin", "Manager"));
+            });
+
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
 
@@ -41,7 +46,7 @@ namespace Movies
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -64,6 +69,45 @@ namespace Movies
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            AddRoles(serviceProvider).Wait();
+        }
+
+        private async Task AddRoles(IServiceProvider serviceProvider)
+        {
+            var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var UserManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            string[] roleNames = { "Admin", "Employe", "Client", "Manager" };
+            IdentityResult roleResult;
+
+            foreach (var roleName in roleNames)
+            {
+                var roleExist = await RoleManager.RoleExistsAsync(roleName);
+                if (!roleExist)
+                {
+                    roleResult = await RoleManager.CreateAsync(new IdentityRole(roleName));
+                }
+            }
+
+            var admin = new ApplicationUser
+            {
+                UserName = Configuration.GetSection("UserSettings")["UserEmail"],
+                Email = Configuration.GetSection("UserSettings")["UserEmail"]
+
+            };
+
+            string mail = Configuration.GetSection("UserSettings")["UserEmail"];
+            string userPassword = Configuration.GetSection("UserSettings")["UserPassowrd"];
+            var _user = await UserManager.FindByEmailAsync(mail);
+
+            if (_user == null)
+            {
+                var createPowerUser = await UserManager.CreateAsync(admin, userPassword);
+                if (createPowerUser.Succeeded)
+                {
+                    await UserManager.AddToRoleAsync(admin, "Admin");
+                }
+            }
         }
     }
 }
