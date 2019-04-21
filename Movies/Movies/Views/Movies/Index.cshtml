@@ -5,6 +5,9 @@
 <link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
 <h2>Index</h2>
 
+
+<a asp-area="" asp-controller="Authors" asp-action="Index">Baza Reżyserów</a>
+<a asp-area="" asp-controller="Genres" asp-action="Index">Baza Gatunków</a>
 <p>
     <a asp-action="Create">Create New</a>
 </p>
@@ -134,14 +137,14 @@
             </tr>
         }
         <h2>List of Products</h2>
-        @for (int i = 0; i< ViewBag.pages; i++)
+        @for (int i = 0; i < ViewBag.pages; i++)
         {
             <form asp-controller="Movies" asp-action="Index">
                 <input type="hidden" id="productionDateId" name="productionDate" value="true">
-                <input type="submit" value=@i class="fakeLink" />            
-            </form>  
+                <input type="submit" value=@i class="fakeLink" />
+            </form>
         }
         <p>@ViewBag.pages</p>
-      
-</tbody>
+
+    </tbody>
 </table>
