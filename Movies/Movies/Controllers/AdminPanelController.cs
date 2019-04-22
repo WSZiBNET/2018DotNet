@@ -30,5 +30,26 @@ namespace Movies.Controllers
         {
             return View(_userManager.Users);
         }
+
+        [HttpPost]
+        public async Task<ActionResult> Delete(string id)
+        {
+            ApplicationUser user = await _userManager.FindByIdAsync(id);
+            if (user != null)
+            {
+                IdentityResult result = await _userManager.DeleteAsync(user);
+                if (result.Succeeded)
+                {
+                    ViewBag.UserDeleteError = "usunięto użytkownika" + " : " + user.UserName;
+                    //return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.UserDeleteError = "nie udało się usunąć użytkownika" + " : " + user.UserName;
+                    //return RedirectToAction("Index");
+                }
+            }
+            return View("Index", _userManager.Users);
+        }
     }
 }
