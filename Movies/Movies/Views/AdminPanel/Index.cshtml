@@ -1,9 +1,11 @@
-﻿@model IEnumerable<ApplicationUser>
+﻿@model List<Movies.ViewModels.UserRoleViewModel>
 @{
     ViewData["Title"] = "Index";
 }
 
 <h2>Index</h2>
+
+<li><a asp-area="" asp-controller="Account" asp-action="Register">Dodaj nowego użytkownika</a></li>
 
 @if (ViewBag.UserDeleteError != null)
 {<p>@ViewBag.UserDeleteError</p>}
@@ -15,16 +17,24 @@
 else
 {
     <table class="table">
-    @foreach (ApplicationUser users in Model)
-    {
-        <form asp-controller="AdminPanel" asp-action="Delete" method="post">
-            <tr>
-                <td> @users.UserName </td>
-                <td> @users.Id </td>
-                <input type="hidden" name="id" value="@users.Id">
-                <td> <input type="submit" value="Usuń" /> </td>
-            </tr>
-        </form>
-    }
+        @foreach (var users in Model)
+        {
+            <form asp-controller="AdminPanel" asp-action="Delete" method="post">
+                <tr>
+                    <td> @users.UserName </td>
+                    <td> @users.Role </td>
+                    <td> @users.UserId</td>
+                    <input type="hidden" name="id" value="@users.UserId">
+                    <td> <input type="submit" value="Usuń" /></td>
+                    <td>
+                        <a asp-controller="AdminPanel"
+                           asp-action="AddRole"
+                           asp-route-userId="@users.UserId">
+                            Dodaj role
+                        </a>
+                    </td>
+                </tr>
+            </form>
+        }
     </table>
 }

@@ -106,6 +106,7 @@ namespace Movies
                 if (createPowerUser.Succeeded)
                 {
                     await UserManager.AddToRoleAsync(admin, "Admin");
+                    
                 }
             }
         }
