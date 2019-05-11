@@ -29,6 +29,13 @@ namespace FirstAPI
             services.AddDbContext<korporowContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("MorfeuszConnection")));
 
+            services.AddSwaggerGen(swagger =>
+            {
+                swagger.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info { Title = "Opis FirstAPI" });
+                swagger.IncludeXmlComments("C:/Users/student/source/repos/2018DotNet/Grupa4/FirstAPI/FirstAPI/FirstAPI.xml");
+            });
+
+            //services.AddLogging();
             services.AddMvc();
         }
 
@@ -39,6 +46,11 @@ namespace FirstAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Opis FirstAPI");
+            });
 
             app.UseMvc();
         }

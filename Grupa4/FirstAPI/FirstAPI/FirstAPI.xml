@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FirstAPI</name>
+    </assembly>
+    <members>
+        <member name="M:FirstAPI.Controllers.ProductsController.GetProducts">
+            <summary>
+            Pobranie produktów i serwisów
+            </summary>
+            <returns>Lista produktów i serwisów</returns>
+        </member>
+        <member name="M:FirstAPI.Controllers.ProductsController.GetProducts(System.Int32)">
+            <summary>
+            Pobranie produktu lub serwisu
+            </summary>
+            <param name="id">Podanie id produktu</param>
+            <returns>Szczegóły produktu lub serwisu</returns>
+        </member>
+        <member name="M:FirstAPI.Controllers.ProductsController.PutProducts(System.Int32,FirstAPI.Models.EF.Products)">
+            <summary>
+            Aktualizacja produktu lub serwisu
+            </summary>
+            <param name="id">Przekazanie id produktu lub serwisu</param>
+            <param name="products">Przekazanie zaktualizowanych danych produktu lub serwisu</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstAPI.Controllers.ProductsController.PostProducts(FirstAPI.Models.EF.Products)">
+            <summary>
+            Dodanie produktu lub serwisu
+            </summary>
+            <param name="products">Przekazanie id produktu lub serwisu</param>
+            <returns>Zwraca inforamcje o dodanym produkcie</returns>
+        </member>
+        <member name="M:FirstAPI.Controllers.ProductsController.DeleteProducts(System.Int32)">
+            <summary>
+            Usunięcie produktu lub serwisu
+            </summary>
+            <param name="id">Przekazanie id produktu lub serwisu</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstAPI.Controllers.ProductsController.ProductsExists(System.Int32)">
+            <summary>
+            Sprawdza istnienie produktu lub serwisu
+            </summary>
+            <param name="id">Podanie ID produktu lub serwisu</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
