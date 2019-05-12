@@ -1,0 +1,44 @@
+﻿@model WebApplicationUseApi.Models.ProductsModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Usunięcie produktu/serwisu</h2>
+
+<h3>Czy jesteś pewien, że chcesz usunąć ten produkt/serwis?</h3>
+<div>
+    @*<h4>ProductsModel</h4>*@
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Category)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="submit" value="Usuń" class="btn btn-default" /> |
+        <a asp-action="Index">Powrót do listy</a>
+    </form>
+</div>
